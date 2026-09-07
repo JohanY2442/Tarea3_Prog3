@@ -4,7 +4,7 @@
 #include "core_numeric.h"
 
 int main() {
-    std::cout << "PRUEBAS" << std::endl;
+    std::cout << "--- PRUEBAS CORE_NUMERIC ---" << std::endl;
 
     // 1. CASOS QUE COMPILAN CORRECTAMENTE
     std::vector<double> datos = {2.0, 4.0, 4.0, 4.0, 5.0, 5.0, 7.0, 9.0};
@@ -21,13 +21,13 @@ int main() {
     /*
     std::vector<std::string> palabras = {"Hola", "Mundo"};
     
-    // ERROR 1: std::string cumple 'Iterable' y 'Addable', pero NO 'Divisible'.
-    // Al intentar calcular 'mean', falla en tiempo de compilación.
-    auto error_mean = core_numeric::mean(palabras);
+    // ERROR 1: std::string cumple 'Iterable' y 'Addable', pero NO 'Divisible' ni 'Subtractable'.
+    // Al intentar calcular 'variance' o 'mean', el compilador detiene la ejecución por fallo de concepts.
+    auto error_variance = core_numeric::variance(palabras);
 
     int numero_suelto = 10;
-    // ERROR 2: int no es 'Iterable' (no tiene std::begin / std::end).
-    // Al intentar pasarlo a 'sum', falla el concept Iterable.
+    // ERROR 2: int no es 'Iterable' (carece de std::begin y std::end).
+    // Al intentar pasarlo a 'sum', falla el concept Iterable inmediatamente.
     auto error_sum = core_numeric::sum(numero_suelto);
     */
 
