@@ -4,9 +4,9 @@
 #include "core_numeric.h"
 
 int main() {
-    std::cout << "--- PRUEBAS CORE_NUMERIC ---" << std::endl;
+    std::cout << "AQUI ESTAN LOS TESTS" << std::endl;
 
-    // 1. CASOS QUE COMPILAN CORRECTAMENTE
+    // 1. CASOS QUE SI COMPILAN
     std::vector<double> datos = {4.0, 24.0, 10.0, 0.0, 9.0, 67.0, 67.0, 19.0, 1.0, 19.0, 10.0, 5.0, 25.0};
 
     auto total = core_numeric::sum(datos);
@@ -18,18 +18,18 @@ int main() {
     std::cout << "Varianza: " << varianza << std::endl;  // La varianza deberia ser 463,3846 aproximadamente
 
     // 2. CASOS QUE NO COMPILAN
-    /*
-    std::vector<std::string> palabras = {"Hola", "Mundo"};
     
-    // ERROR 1: std::string cumple 'Iterable' y 'Addable', pero NO 'Divisible' ni 'Subtractable'.
-    // Al intentar calcular 'variance' o 'mean', el compilador detiene la ejecución por fallo de concepts.
-    auto error_variance = core_numeric::variance(palabras);
+    // std::vector<std::string> palabras = {"Tres", "chanchitos"};
+    // auto prueba_error1 = core_numeric::variance(palabras);
+    // En este caso, si pasamos un vector que contiene strings a la varianza y esto va a fallar porque como son strings no pueden restarse ni dividirse. 
 
-    int numero_suelto = 10;
-    // ERROR 2: int no es 'Iterable' (carece de std::begin y std::end).
-    // Al intentar pasarlo a 'sum', falla el concept Iterable inmediatamente.
-    auto error_sum = core_numeric::sum(numero_suelto);
-    */
+    
+    //int numero = 10;
+    // auto prueba_error2 = core_numeric::sum(numero); 
+    // En este segundo caso, le estamos pasando solo un numero a la suma y esto dara error, porque la suma necesita un contenedor, no un solo numero, ya que no va a poder iterar
+    // si solo es un numero y no tiene ni begin ni end, por eso que no compilara.
+
+  
 
     return 0;
 }
