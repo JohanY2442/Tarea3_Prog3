@@ -23,7 +23,7 @@ concept Divisible = requires(T a, std::size_t n) {
     { a / n } -> std::same_as<T>;
 };
 
-// 2. Concept propio (Soporte de resta para calcular varianza)
+// aqui esta el concept propio
 template <typename T>
 concept Comparable = requires(T a, T b) {
     { a > b } -> std::same_as<bool>;
