@@ -4,7 +4,7 @@
 #include "core_numeric.h"
 
 int main() {
-    std::cout << "--- PRUEBAS CORE_NUMERIC (Parte 1) ---" << std::endl;
+    std::cout << "PRUEBAS" << std::endl;
 
     // 1. CASOS QUE COMPILAN CORRECTAMENTE
     std::vector<double> datos = {2.0, 4.0, 4.0, 4.0, 5.0, 5.0, 7.0, 9.0};
