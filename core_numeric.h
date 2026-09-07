@@ -25,8 +25,8 @@ concept Divisible = requires(T a, std::size_t n) {
 
 // aqui esta el concept propio
 template <typename T>
-concept Comparable = requires(T a, T b) {
-    { a > b } -> std::same_as<bool>;
+concept Subtractable = requires(T a, T b) {
+    { a - b } -> std::same_as<T>;
 };
 
 // AQUI ESTA LA FUNCION Y LOS DOS ALGORITMOS
@@ -55,7 +55,7 @@ auto mean(const C& container) {
 
 // 3. Algoritmo variance
 template <Iterable C>
-requires Addable<typename C::value_type> && Divisible<typename C::value_type>
+requires Addable<typename C::value_type> && Divisible<typename C::value_type> && Subtractable<typename C::value_type>
 auto variance(const C& container) {
     auto m = mean(container);
     typename C::value_type acumulador{};
