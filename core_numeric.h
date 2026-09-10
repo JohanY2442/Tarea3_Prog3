@@ -71,7 +71,7 @@ template <Iterable C>
 requires Addable<typename C::value_type> && Divisible<typename C::value_type> && Subtractable<typename C::value_type>
 auto variance(const C& container) {
     auto m = mean(container);
-    typename C::value_type acumulador{};
+    decltype(m) acumulador{}; // toma el tipo del promedio para no perder decimales
     std::size_t count = 0;
 
     for (const auto& val : container) {
@@ -96,7 +96,6 @@ auto max(const C& container) {
     return max_val;
 }
 
-
 // Algoritmo transform_reduce
 template <Iterable C, typename Func>
 auto transform_reduce(const C& container, Func op) {
@@ -109,27 +108,27 @@ auto transform_reduce(const C& container, Func op) {
     return result;
 }
 
-// FUNCIONES VARIADICAS CON FOLD EXPRESSIONS
+// FUNCIONES VARIADICAS CON FOLD EXPRESSIONS Y CONCEPTS
 
 template <Addable... Args>
 auto sum_variadic(Args... args) {
     return (... + args);
 }
 
-template <typename... Args>
+template <Addable... Args>
 auto mean_variadic(Args... args) {
     auto total = sum_variadic(args...);
     return static_cast<double>(total) / sizeof...(args);
 }
 
-template <typename First, typename... Args>
+template <Comparable First, Comparable... Args>
 auto max_variadic(First first, Args... args) {
     auto res = first;
     ((res = (args > res ? args : res)), ...);
     return res;
 }
 
-template <typename... Args>
+template <Addable... Args>
 auto variance_variadic(Args... args) {
     double m = mean_variadic(args...);
     double acumulador = 0;
