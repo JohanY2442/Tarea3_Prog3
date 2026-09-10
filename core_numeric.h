@@ -124,7 +124,7 @@ auto mean_variadic(Args... args) {
 template <Comparable First, Comparable... Args>
 auto max_variadic(First first, Args... args) {
     auto res = first;
-    ((res = (args > res ? args : res)), ...);
+    ((res = (res < args ? args : res)), ...);
     return res;
 }
 
