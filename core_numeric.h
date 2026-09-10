@@ -75,8 +75,8 @@ auto variance(const C& container) {
     std::size_t count = 0;
 
     for (const auto& val : container) {
-        auto diff = val - m;
-        acumulador = acumulador + (diff * diff);
+        auto diferencia = val - m;
+        acumulador = acumulador + (diferencia * diferencia);
         ++count;
     }
     return acumulador / count;
@@ -87,23 +87,23 @@ template <Iterable C>
 requires Comparable<typename C::value_type>
 auto max(const C& container) {
     auto it = std::begin(container);
-    auto max_val = *it;
+    auto max_valor = *it;
     for (; it != std::end(container); ++it) {
-        if (max_val < *it) {
-            max_val = *it;
+        if (max_valor < *it) {
+            max_valor = *it;
         }
     }
-    return max_val;
+    return max_valor;
 }
 
 // Algoritmo transform_reduce
 template <Iterable C, typename Func>
-auto transform_reduce(const C& container, Func op) {
+auto transform_reduce(const C& container, Func operacion) {
     auto it = std::begin(container);
-    auto result = op(*it);
+    auto result = operacion(*it);
     ++it;
     for (; it != std::end(container); ++it) {
-        result = result + op(*it);
+        result = result + operacion(*it);
     }
     return result;
 }
@@ -123,8 +123,8 @@ auto mean_variadic(Args... args) {
 
 template <Comparable First, Comparable... Args>
 auto max_variadic(First first, Args... args) {
-    auto res = first;
-    ((res = (res < args ? args : res)), ...);
+    auto mayor = first;
+    ((mayor = (mayor < args ? args : mayor)), ...);
     return res;
 }
 
