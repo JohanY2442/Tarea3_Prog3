@@ -3,6 +3,7 @@
 
 #include <concepts>
 #include <iterator>
+#include <type_traits>
 
 namespace core_numeric {
 
@@ -29,8 +30,14 @@ concept Subtractable = requires(T a, T b) {
     { a - b } -> std::same_as<T>;
 };
 
+// otro concept propio para comparar en el max
+template <typename T>
+concept Comparable = requires(T a, T b) {
+    { a < b } -> std::convertible_to<bool>;
+};
+
 // AQUI ESTA LA FUNCION Y LOS DOS ALGORITMOS
-// 1. Función sum
+// Función sum
 template <Iterable C>
 requires Addable<typename C::value_type>
 auto sum(const C& container) {
@@ -41,7 +48,7 @@ auto sum(const C& container) {
     return result;
 }
 
-// 2. Algoritmo mean
+// Algoritmo mean
 template <Iterable C>
 requires Divisible<typename C::value_type> && Addable<typename C::value_type>
 auto mean(const C& container) {
@@ -50,10 +57,16 @@ auto mean(const C& container) {
     for (auto it = std::begin(container); it != std::end(container); ++it) {
         ++count;
     }
-    return total / count;
+
+    // si es tipo entero lo convierto a double para no perder decimales
+    if constexpr (std::is_integral_v<typename C::value_type>) {
+        return static_cast<double>(total) / count;
+    } else {
+        return total / count;
+    }
 }
 
-// 3. Algoritmo variance
+// Algoritmo variance
 template <Iterable C>
 requires Addable<typename C::value_type> && Divisible<typename C::value_type> && Subtractable<typename C::value_type>
 auto variance(const C& container) {
@@ -69,7 +82,60 @@ auto variance(const C& container) {
     return acumulador / count;
 }
 
+// Algoritmo max
+template <Iterable C>
+requires Comparable<typename C::value_type>
+auto max(const C& container) {
+    auto it = std::begin(container);
+    auto max_val = *it;
+    for (; it != std::end(container); ++it) {
+        if (max_val < *it) {
+            max_val = *it;
+        }
+    }
+    return max_val;
+}
 
+
+// Algoritmo transform_reduce
+template <Iterable C, typename Func>
+auto transform_reduce(const C& container, Func op) {
+    auto it = std::begin(container);
+    auto result = op(*it);
+    ++it;
+    for (; it != std::end(container); ++it) {
+        result = result + op(*it);
+    }
+    return result;
+}
+
+// FUNCIONES VARIADICAS CON FOLD EXPRESSIONS
+
+template <Addable... Args>
+auto sum_variadic(Args... args) {
+    return (... + args);
+}
+
+template <typename... Args>
+auto mean_variadic(Args... args) {
+    auto total = sum_variadic(args...);
+    return static_cast<double>(total) / sizeof...(args);
+}
+
+template <typename First, typename... Args>
+auto max_variadic(First first, Args... args) {
+    auto res = first;
+    ((res = (args > res ? args : res)), ...);
+    return res;
+}
+
+template <typename... Args>
+auto variance_variadic(Args... args) {
+    double m = mean_variadic(args...);
+    double acumulador = 0;
+    ((acumulador = acumulador + (args - m) * (args - m)), ...);
+    return acumulador / sizeof...(args);
+}
 
 }
 
