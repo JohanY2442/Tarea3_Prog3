@@ -40,40 +40,33 @@ int main() {
     auto varianza = core_numeric::variance(datos);
     auto maximo = core_numeric::max(datos);
 
-    
     std::cout << "Suma: " << total << std::endl;   // El resultado deberia ser 260
     std::cout << "Promedio: " << promedio << std::endl; // El promedio deberia ser 20
     std::cout << "Varianza: " << varianza << std::endl;  // La varianza deberia ser 463,3846 aprox
     std::cout << "Maximo: " << maximo << std::endl;
 
-
-
-    
     // prueba de transform_reduce
     auto tr = core_numeric::transform_reduce(datos, [](double x) { return x * x; });
     std::cout << "Transform reduce: " << tr << std::endl;
 
     // pruebas de funciones variadicas
     auto s_var = core_numeric::sum_variadic(1, 2, 33, 4);
-    auto m_var = core_numeric::mean_variadic(0.1, 2, 3, 4);
-    auto v_var = core_numeric::variance_variadic(1, 2, 3, 4);
-    auto mx_var = core_numeric::max_variadic(1, 2.7, 3, 4);
+    auto m_var = core_numeric::mean_variadic(0.1, 2.0, 3.0, 4.0);
+    auto v_var = core_numeric::variance_variadic(1.0, 2.0, 3.0, 4.0);
+    auto mx_var = core_numeric::max_variadic(1.0, 2.7, 3.0, 4.0);
 
-    std::cout<< "Sum variadic: " << s_var << std::endl;
-    std::cout<< "Mean variadic: " << m_var << std::endl;
-    std::cout<< "Variance variadic: " << v_var << std::endl;
+    std::cout << "Sum variadic: " << s_var << std::endl;
+    std::cout << "Mean variadic: " << m_var << std::endl;
+    std::cout << "Variance variadic: " << v_var << std::endl;
     std::cout << "Max variadic: " << mx_var << std::endl;
 
-    
     // prueba de objetos con la clase Punto
     std::vector<Punto> puntos = {{1.0, 2.0}, {3.0, 4.0}};
     auto suma_puntos = core_numeric::sum(puntos);
     std::cout << "Suma de puntos: (" << suma_puntos.x << ", " << suma_puntos.y << ")" << std::endl;
 
-
-    
     // 2. AHORA LOS CASOS QUE NO COMPILAN
-    
+
     // std::vector<std::string> palabras = {"Tres", "chanchitos"};
     // auto prueba_error1 = core_numeric::variance(palabras);
     // En este caso, si pasamos un vector que contiene strings a la varianza y esto va a fallar porque como son strings no pueden restarse ni dividirse. 
@@ -88,6 +81,5 @@ int main() {
     // auto prueba_error3 = core_numeric::max(lista_vacia);
     // En este tercer caso va a fallar porque la estructura no tiene implementado el operador < y no cumple el concept Comparable que pide max.
 
-    
     return 0;
 }
