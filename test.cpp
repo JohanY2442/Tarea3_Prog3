@@ -43,7 +43,7 @@ int main() {
     std::cout << "Suma: " << total << std::endl;   // El resultado deberia ser 260
     std::cout << "Promedio: " << promedio << std::endl; // El promedio deberia ser 20
     std::cout << "Varianza: " << varianza << std::endl;  // La varianza deberia ser 463,3846 aprox
-    std::cout << "Maximo: " << maximo << std::endl;
+    std::cout << "Maximo: " << maximo << std::endl; // El numero maximo deberia ser 67.0
 
     // prueba de transform_reduce
     auto tr = core_numeric::transform_reduce(datos, [](double x) { return x * x; });
