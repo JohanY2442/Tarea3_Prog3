@@ -125,7 +125,7 @@ template <Comparable First, Comparable... Args>
 auto max_variadic(First first, Args... args) {
     auto mayor = first;
     ((mayor = (mayor < args ? args : mayor)), ...);
-    return res;
+    return mayor;
 }
 
 template <Addable... Args>
