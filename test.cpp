@@ -33,32 +33,32 @@ int main() {
     // ACA PONEMOS LOS TESTS
 
     // 1. CASOS QUE SI COMPILAN
-    std::vector<double> datos = {4.0, 24.0, 10.0, 0.0, 9.0, 67.0, 67.0, 19.0, 1.0, 19.0, 10.0, 5.0, 25.0};
+    std::vector<double> numeros = {4.0, 24.0, 10.0, 0.0, 9.0, 67.0, 67.0, 19.0, 1.0, 19.0, 10.0, 5.0, 25.0};
 
-    auto total = core_numeric::sum(datos);
-    auto promedio = core_numeric::mean(datos);
-    auto varianza = core_numeric::variance(datos);
-    auto maximo = core_numeric::max(datos);
+    auto total = core_numeric::sum(numeros);
+    auto promedio = core_numeric::mean(numeros);
+    auto varianza = core_numeric::variance(numeros);
+    auto maximo = core_numeric::max(numeros);
 
-    std::cout << "Suma: " << total << std::endl;   // El resultado deberia ser 260
-    std::cout << "Promedio: " << promedio << std::endl; // El promedio deberia ser 20
-    std::cout << "Varianza: " << varianza << std::endl;  // La varianza deberia ser 463,3846 aprox
+    std::cout << "Suma: "<< total << std::endl;   // El resultado deberia ser 260
+    std::cout<< "Promedio: " << promedio << std::endl; // El promedio deberia ser 20
+    std::cout<< "Varianza: " << varianza << std::endl;  // La varianza deberia ser 463,3846 aprox
     std::cout << "Maximo: " << maximo << std::endl; // El numero maximo deberia ser 67.0
 
     // prueba de transform_reduce
-    auto tr = core_numeric::transform_reduce(datos, [](double x) { return x * x; });
-    std::cout << "Transform reduce: " << tr << std::endl;
+    auto resultado_transform = core_numeric::transform_reduce(numeros, [](double x) { return x * x; });
+    std::cout << "Transform reduce: " << resultado_transform << std::endl;
 
     // pruebas de funciones variadicas
-    auto s_var = core_numeric::sum_variadic(1, 2, 33, 4);
-    auto m_var = core_numeric::mean_variadic(0.1, 2.0, 3.0, 4.0);
-    auto v_var = core_numeric::variance_variadic(1.0, 2.0, 3.0, 4.0);
-    auto mx_var = core_numeric::max_variadic(1.0, 2.7, 3.0, 4.0);
+    auto suma_variadica = core_numeric::sum_variadic(1, 2, 33, 4);
+    auto mean_variadico = core_numeric::mean_variadic(0.1, 2.0, 3.0, 4.0);
+    auto variance_variadica = core_numeric::variance_variadic(1.0, 2.0, 3.0, 4.0);
+    auto max_variadico = core_numeric::max_variadic(1.0, 2.7, 3.0, 4.0);
 
-    std::cout << "Sum variadic: " << s_var << std::endl;
-    std::cout << "Mean variadic: " << m_var << std::endl;
-    std::cout << "Variance variadic: " << v_var << std::endl;
-    std::cout << "Max variadic: " << mx_var << std::endl;
+    std::cout << "Sum variadic: " << suma_variadica << std::endl;
+    std::cout << "Mean variadic: " << mean_variadico << std::endl;
+    std::cout << "Variance variadic: " << variance_variadica << std::endl;
+    std::cout << "Max variadic: " << max_variadico << std::endl;
 
     // prueba de objetos con la clase Punto
     std::vector<Punto> puntos = {{1.0, 2.0}, {3.0, 4.0}};
